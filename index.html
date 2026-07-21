@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Astral by HTML5 UP
 	html5up.net | @ajlkn
@@ -11,6 +11,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.category-btn { padding: 10px 20px; margin: 0 10px; border: 2px solid #00d4ff; background: transparent; color: #00d4ff; cursor: pointer; border-radius: 5px; font-weight: bold; transition: all 0.3s; }
+			.category-btn:hover { background: #00d4ff; color: white; }
+			.category-btn.active { background: #00d4ff; color: white; }
+			.work-item { display: block; }
+			.work-item.hidden { display: none; }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -32,7 +39,7 @@
 							<article id="home" class="panel intro">
 								<header>
 									<h1>MIDGAP</h1>
-									<p>?뚰꽭?щ옉.. 洹몃━怨?留쏆엳??..</p>
+									<p>소털사랑.. 그리고 맛있는...</p>
 								</header>
 								<a href="#work" class="jumplink pic">
 									<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
@@ -50,43 +57,49 @@
 									Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 									luctus elit eget interdum.
 								</p>
+								<div style="text-align: center; margin-bottom: 2rem;">
+									<button onclick="filterCategory('all')" class="category-btn active">All</button>
+									<button onclick="filterCategory('music')" class="category-btn">🎵 음악</button>
+									<button onclick="filterCategory('food')" class="category-btn">🍽️ 음식</button>
+									<button onclick="filterCategory('study')" class="category-btn">📚 공부</button>
+								</div>
 								<section>
 									<div class="row">
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="music"><img src="images/pic01.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic02.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="music"><img src="images/pic02.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic03.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="music"><img src="images/pic03.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic04.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="music"><img src="images/pic04.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="food"><img src="images/pic05.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="food"><img src="images/pic06.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="food"><img src="images/pic07.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="food"><img src="images/pic08.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="study"><img src="images/pic09.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="study"><img src="images/pic10.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="study"><img src="images/pic11.jpg" alt=""></a>
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
+											<a href="#" class="image fit work-item" data-category="study"><img src="images/pic12.jpg" alt=""></a>
 										</div>
 									</div>
 								</section>
@@ -137,6 +150,23 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				function filterCategory(category) {
+					const items = document.querySelectorAll('.work-item');
+					const buttons = document.querySelectorAll('.category-btn');
+
+					buttons.forEach(btn => btn.classList.remove('active'));
+					event.target.classList.add('active');
+
+					items.forEach(item => {
+						if (category === 'all' || item.dataset.category === category) {
+							item.classList.remove('hidden');
+						} else {
+							item.classList.add('hidden');
+						}
+					});
+				}
+			</script>
 
 	</body>
 </html>
