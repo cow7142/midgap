@@ -58,10 +58,10 @@
 									luctus elit eget interdum.
 								</p>
 								<div style="text-align: center; margin-bottom: 2rem;">
-									<button onclick="filterCategory('all')" class="category-btn active">All</button>
-									<button onclick="filterCategory('music')" class="category-btn">🎵 음악</button>
-									<button onclick="filterCategory('food')" class="category-btn">🍽️ 음식</button>
-									<button onclick="filterCategory('study')" class="category-btn">📚 공부</button>
+									<button onclick="filterCategory(this, 'all')" class="category-btn active">All</button>
+									<button onclick="filterCategory(this, 'music')" class="category-btn">🎵 음악</button>
+									<button onclick="filterCategory(this, 'food')" class="category-btn">🍽️ 음식</button>
+									<button onclick="filterCategory(this, 'study')" class="category-btn">📚 공부</button>
 								</div>
 								<section>
 									<div class="row">
@@ -151,12 +151,12 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-				function filterCategory(category) {
+				function filterCategory(btn, category) {
 					const items = document.querySelectorAll('.work-item');
 					const buttons = document.querySelectorAll('.category-btn');
 
-					buttons.forEach(btn => btn.classList.remove('active'));
-					event.target.classList.add('active');
+					buttons.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
 
 					items.forEach(item => {
 						if (category === 'all' || item.dataset.category === category) {
